@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Incident</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 30px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #dc3545; }
+        button { background: #dc3545; color: white; padding: 10px 18px; border: none; border-radius: 6px; cursor: pointer; }
+        a { background: #6c757d; color: white; padding: 10px 14px; border-radius: 6px; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Delete Incident</h1>
+
+    <p>Are you sure you want to delete <strong>{{ incident.title }}</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'incidents:detail' incident.pk %}">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Incident Detail</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f6f9;
+            padding:30px;
+        }
+
+        .container{
+            max-width:800px;
+            margin:auto;
+            background:white;
+            padding:25px;
+            border-radius:12px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1{
+            color:#1f3b57;
+        }
+
+        .info{
+            background:#f9fbff;
+            padding:15px;
+            border-left:6px solid #1f6feb;
+            border-radius:8px;
+        }
+
+        .btn{
+            padding:10px 14px;
+            border-radius:6px;
+            text-decoration:none;
+            color:white;
+            margin-right:8px;
+            display:inline-block;
+        }
+
+        .edit{
+            background:#1f6feb;
+        }
+
+        .delete{
+            background:#dc3545;
+        }
+
+        .back{
+            background:#6c757d;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>{{ incident.title }}</h1>
+
+    <div class="info">
+
+        <p>
+            <strong>Description:</strong>
+            {{ incident.description }}
+        </p>
+
+        <p>
+            <strong>Severity:</strong>
+            {{ incident.severity }}
+        </p>
+
+        <p>
+            <strong>Resolved:</strong>
+            {{ incident.resolved }}
+        </p>
+
+        <p>
+            <strong>Reported:</strong>
+            {{ incident.reported_at }}
+        </p>
+
+        <p>
+            <strong>Updated:</strong>
+            {{ incident.updated_at }}
+        </p>
+
+    </div>
+
+    <br>
+
+    <a class="btn edit"
+       href="{% url 'incidents:update' incident.pk %}">
+       Edit
+    </a>
+
+    <a class="btn delete"
+       href="{% url 'incidents:delete' incident.pk %}">
+       Delete
+    </a>
+
+    <a class="btn back"
+       href="{% url 'incidents:home' %}">
+       Back
+    </a>
+
+</div>
+
+</body>
+</html>
