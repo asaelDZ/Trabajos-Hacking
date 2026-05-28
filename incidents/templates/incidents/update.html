@@ -1,11 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Update</title>
+    <title>Update Incident</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f6f9;
+            padding:40px;
+            margin:0;
+        }
+
+        .container{
+            max-width:700px;
+            margin:auto;
+            background:white;
+            padding:30px;
+            border-radius:12px;
+            box-shadow:0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1{
+            color:#1f3b57;
+            margin-bottom:25px;
+        }
+
+        input,
+        textarea,
+        select{
+            width:100%;
+            padding:12px;
+            margin-top:8px;
+            margin-bottom:20px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:16px;
+            box-sizing:border-box;
+        }
+
+        textarea{
+            min-height:180px;
+        }
+
+        .checkbox{
+            width:auto;
+        }
+
+        button{
+            background:#1f6feb;
+            color:white;
+            border:none;
+            padding:12px 20px;
+            border-radius:6px;
+            font-size:16px;
+            cursor:pointer;
+        }
+
+        a{
+            text-decoration:none;
+            margin-left:10px;
+            color:#1f6feb;
+            font-weight:bold;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-    <h1>Update Incident</h1>
+<div class="container">
+
+    <h1>✏️ Update Incident</h1>
 
     <form method="POST">
 
@@ -14,10 +81,16 @@
         {{ form.as_p }}
 
         <button type="submit">
-            Update
+            Update Incident
         </button>
 
+        <a href="{% url 'incidents:home' %}">
+            Back
+        </a>
+
     </form>
+
+</div>
 
 </body>
 </html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login | CyberLab</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f0f1a;
+            color: #cdd6f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background: #1e1e2e;
+            padding: 40px;
+            border-radius: 10px;
+            width: 350px;
+            border: 1px solid #45475a;
+        }
+
+        h1 {
+            color: #89b4fa;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 15px 0;
+            background: #11111b;
+            color: #cdd6f4;
+            border: 1px solid #45475a;
+            border-radius: 4px;
+        }
+
+        button {
+            background: #89b4fa;
+            color: #1e1e2e;
+            padding: 10px 24px;
+            border: none;
+            border-radius: 4px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        a {
+            color: #89b4fa;
+        }
+
+        .error {
+            color: #f38ba8;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>🔐 CyberLab Login</h1>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Username:</label>
+        <input type="text" name="username" required>
+
+        <label>Password:</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p>
+        No account?
+        <a href="{% url 'accounts:register' %}">Register here</a>
+    </p>
+</div>
+
+</body>
+</html>

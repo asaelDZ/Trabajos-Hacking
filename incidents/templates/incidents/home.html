@@ -1,60 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Incident List</title>
+    <title>Cyber Incident List</title>
 
     <style>
-
-        body{
+        body {
             font-family: Arial, sans-serif;
-            background:#f4f6f9;
-            padding:30px;
+            background: #f4f6f9;
+            padding: 30px;
+            margin: 0;
         }
 
-        .container{
-            max-width:900px;
-            margin:auto;
-            background:white;
-            padding:25px;
-            border-radius:12px;
-            box-shadow:0 4px 15px rgba(0,0,0,0.1);
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        h1{
-            color:#1f3b57;
+        nav {
+            background: #1e1e2e;
+            color: #cdd6f4;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .btn{
-            background:#1f6feb;
-            color:white;
-            padding:10px 15px;
-            text-decoration:none;
-            border-radius:6px;
-            display:inline-block;
-            margin-bottom:20px;
+        nav a {
+            color: #89b4fa;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
         }
 
-        .card{
-            background:#f9fbff;
-            border-left:6px solid #1f6feb;
-            padding:15px;
-            margin-bottom:15px;
-            border-radius:8px;
+        nav button {
+            background: #f38ba8;
+            color: #1e1e2e;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        .link{
-            color:#1f6feb;
-            text-decoration:none;
-            font-weight:bold;
+        h1 {
+            color: #1f3b57;
         }
 
+        .btn {
+            background: #1f6feb;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border-left: 6px solid #1f6feb;
+            background: #f9fbff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .link {
+            color: #1f6feb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .empty {
+            color: #777;
+            font-style: italic;
+        }
     </style>
-
 </head>
 
 <body>
 
 <div class="container">
+
+    <nav>
+        <div>
+            👤 Logged in as:
+            <strong>{{ request.user.username }}</strong>
+        </div>
+
+        <div>
+            <a href="{% url 'accounts:dashboard' %}">My Dashboard</a>
+
+            <form method="POST" action="{% url 'accounts:logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </nav>
 
     <h1>Cyber Incident List</h1>
 
@@ -65,29 +112,19 @@
     {% for incident in incidents %}
 
         <div class="card">
-
             <h3>{{ incident.title }}</h3>
 
-            <p>
-                <strong>Severity:</strong>
-                {{ incident.severity }}
-            </p>
+            <p><strong>Severity:</strong> {{ incident.severity }}</p>
+            <p><strong>Resolved:</strong> {{ incident.resolved }}</p>
 
-            <p>
-                <strong>Resolved:</strong>
-                {{ incident.resolved }}
-            </p>
-
-            <a class="link"
-               href="{% url 'incidents:detail' incident.pk %}">
-               View Detail
+            <a class="link" href="{% url 'incidents:detail' incident.pk %}">
+                View Detail
             </a>
-
         </div>
 
     {% empty %}
 
-        <p>No incidents found.</p>
+        <p class="empty">No incidents found.</p>
 
     {% endfor %}
 

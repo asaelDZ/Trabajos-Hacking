@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard | CyberLab</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background:#0f0f1a;
+            color:#cdd6f4;
+            margin:0;
+            padding:40px;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:auto;
+        }
+
+        .top{
+            background:#1e1e2e;
+            padding:20px;
+            border-radius:10px;
+            margin-bottom:20px;
+            border:1px solid #45475a;
+        }
+
+        h1{
+            color:#89b4fa;
+        }
+
+        .card{
+            background:#1e1e2e;
+            padding:20px;
+            margin-bottom:20px;
+            border-radius:10px;
+            border:1px solid #45475a;
+        }
+
+        .btn{
+            display:inline-block;
+            background:#89b4fa;
+            color:#1e1e2e;
+            padding:10px 18px;
+            text-decoration:none;
+            border-radius:5px;
+            font-weight:bold;
+        }
+
+        .logout{
+            background:#f38ba8;
+            margin-left:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top">
+
+        <h1>👤 CyberLab Dashboard</h1>
+
+        <p>
+            Username:
+            <strong>{{ request.user.username }}</strong>
+        </p>
+
+        <p>
+            Role:
+            <strong>{{ profile.role }}</strong>
+        </p>
+
+        <a href="/incidents/" class="btn">
+            View Incidents
+        </a>
+
+        <form method="POST" action="{% url 'accounts:logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn logout">
+                Logout
+            </button>
+        </form>
+
+    </div>
+
+    <h2>📌 My Incidents</h2>
+
+    {% for incident in incidents %}
+
+        <div class="card">
+
+            <h3>{{ incident.title }}</h3>
+
+            <p>
+                {{ incident.description }}
+            </p>
+
+            <p>
+                Severity:
+                <strong>{{ incident.severity }}</strong>
+            </p>
+
+        </div>
+
+    {% empty %}
+
+        <div class="card">
+            <p>No incidents found.</p>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
